@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct ActivityRingView: View {
-    @Binding var progress: CGFloat
+public struct ActivityRingView: View {
+    var progress: CGFloat
     @State private var animate = false
     
     let size: CGFloat
     let lineWidth: CGFloat
     let colors: [Color]
     
-    init(progress: Binding<CGFloat>, size: CGFloat = 100, lineWidth: CGFloat? = nil, colors: [Color] = [.green, .red]) {
-        self._progress = progress
+    public init(progress: CGFloat, size: CGFloat = 100, lineWidth: CGFloat? = nil, colors: [Color] = [.green, .red]) {
+        self.progress = progress
         self.size = size
         self.lineWidth = lineWidth ?? size / 4
         self.colors = colors
     }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             Circle()
                 .stroke(colors[0].opacity(0.3), lineWidth: lineWidth)
@@ -63,7 +63,7 @@ struct ActivityRingView: View {
         Color.black
             .edgesIgnoringSafeArea(.all)
         ActivityRingView(
-            progress: .constant(0.7),
+            progress: 0.7,
             size: 200
         )
         .fixedSize()

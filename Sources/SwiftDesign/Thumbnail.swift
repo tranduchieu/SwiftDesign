@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct Thumbnail {
+    let imageUrl: URL?
+    let aspectRatio: CGFloat = 16 / 10
+    let cornerRadius: CGFloat = 8
+}
+
 public struct AsyncThumbnail: View {
     let imageUrl: URL?
     let aspectRatio: CGFloat

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct AsyncThumbnail {
+public struct AsyncThumbnail: Codable {
     public let imageUrl: URL?
     public let aspectRatio: CGFloat
     public let cornerRadius: CGFloat

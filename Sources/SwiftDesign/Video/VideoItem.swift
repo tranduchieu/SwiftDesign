@@ -10,16 +10,18 @@ import Foundation
 public struct VideoItem: Identifiable, Hashable {
     public let id: String
     public let title: String
-    public let subtitle: String?
+    public let author: String?
     public let thumbnail: AsyncThumbnail?
     public let youtubeUrl: URL?
+    public let duration: Double?
     
-    public init(id: String, title: String, subtitle: String? = nil, thumbnail: AsyncThumbnail? = nil, youtubeUrl: URL? = nil) {
+    public init(id: String, title: String, author: String? = nil, thumbnail: AsyncThumbnail? = nil, youtubeUrl: URL? = nil, duration: Double? = nil) {
         self.id = id
         self.title = title
-        self.subtitle = subtitle
+        self.author = author
         self.thumbnail = thumbnail
         self.youtubeUrl = youtubeUrl
+        self.duration = duration
     }
     
     public static func == (lhs: VideoItem, rhs: VideoItem) -> Bool {

@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  ItemStack.swift
 //
 //
 //  Created by Hieu Tran on 04/06/2024.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct ItemRow: View {
+public struct ItemStack: View {
     let thumbnail: AsyncThumbnail?
     let title: String
     let subtitle: String?
@@ -53,7 +53,7 @@ public struct ItemRow: View {
 }
 
 #Preview {
-    ItemRow(
+    ItemStack(
         thumbnail: AsyncThumbnail (
             imageUrl: URL(string: "https://via.placeholder.com/150"),
             aspectRatio: 16 / 9,

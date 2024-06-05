@@ -1,5 +1,5 @@
 //
-//  Thumbnail.swift
+//  AsyncThumbnail.swift
 //
 //
 //  Created by Hieu Tran on 25/05/2024.
@@ -7,16 +7,10 @@
 
 import SwiftUI
 
-struct Thumbnail {
-    let imageUrl: URL?
-    let aspectRatio: CGFloat = 16 / 10
-    let cornerRadius: CGFloat = 8
-}
-
-public struct AsyncThumbnail: View {
-    let imageUrl: URL?
-    let aspectRatio: CGFloat
-    let cornerRadius: CGFloat
+public struct AsyncThumbnail {
+    public let imageUrl: URL?
+    public let aspectRatio: CGFloat
+    public let cornerRadius: CGFloat
     
     public init(
         imageUrl: URL?,
@@ -27,9 +21,19 @@ public struct AsyncThumbnail: View {
         self.aspectRatio = aspectRatio
         self.cornerRadius = cornerRadius
     }
+}
+
+public struct AsyncThumbnailView: View {
+    let asyncThumbnail: AsyncThumbnail
+    
+    public init(
+        asyncThumbnail: AsyncThumbnail
+    ) {
+        self.asyncThumbnail = asyncThumbnail
+    }
     
     public var body: some View {
-        if let imageUrl = imageUrl {
+        if let imageUrl = asyncThumbnail.imageUrl {
             AsyncImage(url: imageUrl) { image in
                 image
                     .resizable()
@@ -40,32 +44,34 @@ public struct AsyncThumbnail: View {
                         minHeight: 0,
                         maxHeight: .infinity
                     )
-                    .aspectRatio(aspectRatio, contentMode: .fit)
+                    .aspectRatio(asyncThumbnail.aspectRatio, contentMode: .fit)
                     .clipped()
-                    .cornerRadius(cornerRadius)
+                    .cornerRadius(asyncThumbnail.cornerRadius)
                 
             } placeholder: {
-                RoundedRectangle(cornerRadius: cornerRadius)
+                RoundedRectangle(cornerRadius: asyncThumbnail.cornerRadius)
                     .fill(
                         Color(UIColor.secondarySystemBackground)
                     )
-                    .aspectRatio(aspectRatio, contentMode: .fit)
+                    .aspectRatio(asyncThumbnail.aspectRatio, contentMode: .fit)
                 
             }
         } else {
-            RoundedRectangle(cornerRadius: cornerRadius)
+            RoundedRectangle(cornerRadius: asyncThumbnail.cornerRadius)
                 .fill(
                     Color(UIColor.secondarySystemBackground)
                 )
-                .aspectRatio(aspectRatio, contentMode: .fit)
+                .aspectRatio(asyncThumbnail.aspectRatio, contentMode: .fit)
         }
     }
 }
 
 #Preview {
-    AsyncThumbnail(
-        imageUrl: URL(string: "https://picsum.photos/200/300"),
+    let asyncThumbnail = AsyncThumbnail(
+        imageUrl: URL(string: "https://picsum.photos/200/300")!,
         aspectRatio: 16 / 9,
         cornerRadius: 8
     )
+    
+    return AsyncThumbnailView(asyncThumbnail: asyncThumbnail)
 }

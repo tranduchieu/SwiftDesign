@@ -31,3 +31,15 @@ public struct PlaylistItem: Identifiable, Hashable {
         hasher.combine(id)
     }
 }
+
+extension PlaylistItem {
+    public static let examples: [PlaylistItem] = [
+        PlaylistItem(
+            id: "1",
+            title: "Playlist 1",
+            thumbnail: AsyncThumbnail(imageUrl: URL(string: "https://i.ytimg.com/vi/9T1nGrgAhbI/maxresdefault.jpg"), aspectRatio: 16 / 9, cornerRadius: 0),
+            bgColor: Color.blue,
+            videoCount: 10
+        )
+    ]
+}

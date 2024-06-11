@@ -16,6 +16,23 @@ public enum CardSize {
 public struct VideoCard: View {
     let videoItem: VideoItem
     
+    var durationFormatted: String? {
+        guard let duration = videoItem.duration else { return nil }
+        let formatter = DateComponentsFormatter()
+        
+        if duration < 3600 {
+            // If duration is less than 1 hour, format as mm:ss
+            formatter.allowedUnits = [.minute, .second]
+        } else {
+            // If duration is 1 hour or more, format as hh:mm:ss
+            formatter.allowedUnits = [.hour, .minute, .second]
+        }
+        
+        formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = .pad
+        return formatter.string(from: duration)
+    }
+    
     public init(
         videoItem: VideoItem
     ) {
@@ -26,6 +43,28 @@ public struct VideoCard: View {
         VStack(alignment: .leading, spacing: 8) {
             if let thumbnail = videoItem.thumbnail {
                 AsyncThumbnailView(asyncThumbnail: thumbnail)
+                    .overlay {
+                        HStack {
+                            Spacer()
+                            if let duration = durationFormatted {
+                                Text(duration)
+                                    .font(.caption)
+                                    .padding(4)
+                                    .background(Color.black.opacity(0.6))
+                                    .foregroundStyle(.white)
+                                    .cornerRadius(4)
+                                    .offset(x: 4, y: 4)
+                                    .padding(4)
+                            }
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 4)
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: thumbnail.cornerRadius)
+                            .stroke(.thinMaterial, lineWidth: 1) // Add the inner border
+                    )
             }
             
             VStack(alignment: .leading, spacing: 4) {

@@ -118,15 +118,14 @@ public struct VideoCard: View {
                     .font(cardSize == .large ? .body : .subheadline)
                     .lineLimit(2)
                     .multilineTextAlignment(/*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/)
-                    .padding(.horizontal, 8)
                 if let subtitle = videoItem.subtitle{
                     Text(subtitle)
                         .font(.caption)
                         .lineLimit(1)
                         .foregroundStyle(.secondary)
-                        .padding(.horizontal, 8)
                 }
             }
+            .padding(.horizontal, cardSize == .large ? 12 : 8)
         }
     }
 }

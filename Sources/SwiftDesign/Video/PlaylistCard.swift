@@ -32,14 +32,6 @@ public struct PlaylistCard: View {
                     
                     
                     Spacer()
-                    //                    VStack(alignment: .leading, spacing: 4) {
-                    //                        Text(playlistItem.title)
-                    //                            .font(.subheadline)
-                    //                            .lineLimit(2)
-                    //                            .padding(.horizontal, 8)
-                    //                        Spacer()
-                    //
-                    //                    }
                 }
                 
             )
@@ -83,36 +75,6 @@ public struct PlaylistCard: View {
                 RoundedRectangle(cornerRadius: 18)
                     .stroke(.thinMaterial, lineWidth: 1) // Add the inner border
             )
-        //        VStack(alignment: .leading, spacing: 8) {
-        //            if let thumbnail = playlistItem.thumbnail {
-        //                AsyncThumbnailView(asyncThumbnail: thumbnail)
-        //            }
-        //            
-        //            VStack(alignment: .leading, spacing: 4) {
-        //                Text(playlistItem.title)
-        //                    .font(.subheadline)
-        //                    .lineLimit(2)
-        //                    .padding(.horizontal, 8)
-        //
-        //            }
-        //        }
-        ////        .fill(.red)
-        //        .aspectRatio(9 / 16, contentMode: .fit)
-        //        .background(playlistItem.bgColor)
-    }
-}
-
-public struct RoundedCornersShape: Shape {
-    var corners: UIRectCorner
-    var radius: CGFloat
-    
-    public func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(
-            roundedRect: rect,
-            byRoundingCorners: corners,
-            cornerRadii: CGSize(width: radius, height: radius)
-        )
-        return Path(path.cgPath)
     }
 }
 

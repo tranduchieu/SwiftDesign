@@ -15,8 +15,9 @@ public struct VideoItem: Identifiable, Hashable {
     public let thumbnail: AsyncThumbnail?
     public let youtubeUrl: URL?
     public let duration: Double?
+    public var lastPlaybackPosition: Double?
     
-    public init(id: String, title: String, subtitle: String? = nil, author: String? = nil, thumbnail: AsyncThumbnail? = nil, youtubeUrl: URL? = nil, duration: Double? = nil) {
+    public init(id: String, title: String, subtitle: String? = nil, author: String? = nil, thumbnail: AsyncThumbnail? = nil, youtubeUrl: URL? = nil, duration: Double? = nil, lastPlaybackPosition: Double? = nil) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
@@ -24,6 +25,7 @@ public struct VideoItem: Identifiable, Hashable {
         self.thumbnail = thumbnail
         self.youtubeUrl = youtubeUrl
         self.duration = duration
+        self.lastPlaybackPosition = lastPlaybackPosition
     }
     
     public static func == (lhs: VideoItem, rhs: VideoItem) -> Bool {

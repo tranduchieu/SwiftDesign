@@ -11,13 +11,15 @@ import SwiftUI
 public struct PlaylistItem: Identifiable, Hashable {
     public let id: String
     public let title: String
+    public let subtitle: String?
     public let thumbnail: AsyncThumbnail?
     public let bgColor: Color?
     public let videoCount: Int
     
-    public init(id: String, title: String, thumbnail: AsyncThumbnail?, bgColor: Color?, videoCount: Int) {
+    public init(id: String, title: String, subtitle: String? = nil, thumbnail: AsyncThumbnail?, bgColor: Color?, videoCount: Int) {
         self.id = id
         self.title = title
+        self.subtitle = subtitle
         self.thumbnail = thumbnail
         self.bgColor = bgColor
         self.videoCount = videoCount
@@ -37,6 +39,7 @@ extension PlaylistItem {
         PlaylistItem(
             id: "1",
             title: "Playlist 1",
+            subtitle: "Subtitle 1",
             thumbnail: AsyncThumbnail(imageUrl: URL(string: "https://i.ytimg.com/vi/9T1nGrgAhbI/maxresdefault.jpg"), aspectRatio: 16 / 9, cornerRadius: 0),
             bgColor: Color.blue,
             videoCount: 10

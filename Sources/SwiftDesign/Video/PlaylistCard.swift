@@ -9,11 +9,14 @@ import SwiftUI
 
 public struct PlaylistCard: View {
     let playlistItem: PlaylistItem
+    let cardSize: CardSize
     
     public init(
-        playlistItem: PlaylistItem
+        playlistItem: PlaylistItem,
+        cardSize: CardSize = .small
     ) {
         self.playlistItem = playlistItem
+        self.cardSize = cardSize
     }
     
     public var body: some View {
@@ -38,36 +41,39 @@ public struct PlaylistCard: View {
             .overlay(
                 VStack {
                     Spacer()
-                    VStack(spacing: 8) {
+                    VStack(spacing: cardSize == .large ? 12 : 8) {
                         HStack {
                             Text("PLAYLIST")
-                                .font(.caption2)
+                                .font(cardSize == .large ? .caption : .caption2)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.secondary)
                             
                             Spacer()
                         }
                         HStack(alignment: .top) {
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading, spacing: cardSize == .large ? 4 : 2) {
                                 Text(playlistItem.title)
-                                    .font(.subheadline)
+                                    .font(cardSize == .large ? .title2 : .subheadline)
                                     .fontWeight(.bold)
                                     .lineLimit(2)
+                                    .minimumScaleFactor(0.8)
+                                    .multilineTextAlignment(.leading)
+//                                    .frame(maxHeight: 48, alignment: .top)
                                 Text("\(playlistItem.videoCount) videos")
-                                    .font(.caption)
+                                    .font(cardSize == .large ? .subheadline : .caption)
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
                             Image(systemName: "play.square.stack.fill")
-                                .font(.title2)
+                                .font(cardSize == .large ? .title : .title2)
                             //                            .foregroundStyle(.secondary)
                         }
                         Spacer()
                     }
-                    .padding(.horizontal, 12)
+                    .padding(.horizontal, cardSize == .large ? 18 : 12)
                     .padding(.top, 12)
                     .containerRelativeFrame(.vertical) { length, axis in
-                        return length / 1.8
+                        return cardSize == .large ? length / 2.4 : length / 1.8
                     }
                 }
             )

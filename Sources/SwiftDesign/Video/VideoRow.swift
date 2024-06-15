@@ -9,41 +9,6 @@ import SwiftUI
 
 public struct VideoRow: View {
     let videoItem: VideoItem
-    var durationFormatted: String? {
-        guard let duration = videoItem.duration else { return nil }
-        let formatter = DateComponentsFormatter()
-        
-        if duration < 3600 {
-            // If duration is less than 1 hour, format as mm:ss
-            formatter.allowedUnits = [.minute, .second]
-        } else {
-            // If duration is 1 hour or more, format as hh:mm:ss
-            formatter.allowedUnits = [.hour, .minute, .second]
-        }
-        
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = .pad
-        return formatter.string(from: duration)
-    }
-    
-    var durationLeftFormatted: String? {
-        guard let duration = videoItem.duration, let lastPlaybackPosition = videoItem.lastPlaybackPosition else { return nil }
-        let formatter = DateComponentsFormatter()
-        
-        let leftDuration = duration - lastPlaybackPosition
-        
-        if leftDuration < 3600 {
-            // If duration is less than 1 hour, format as mm:ss
-            formatter.allowedUnits = [.minute, .second]
-        } else {
-            // If duration is 1 hour or more, format as hh:mm:ss
-            formatter.allowedUnits = [.hour, .minute, .second]
-        }
-        
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = .pad
-        return formatter.string(from: leftDuration)
-    }
     
     public init(videoItem: VideoItem) {
         self.videoItem = videoItem
@@ -60,11 +25,11 @@ public struct VideoRow: View {
                         HStack {
                             Spacer()
 
-                            if let durationFormatted = durationFormatted {
+                            if let durationFormatted = videoItem.durationFormatted {
                                 
                                 HStack(spacing: 4) {
                                     Image(systemName: "play.fill")
-                                    Text(durationLeftFormatted != nil ? "\(durationLeftFormatted!) left" : durationFormatted)
+                                    Text(videoItem.durationLeftFormatted != nil ? "\(videoItem.durationLeftFormatted!) left" : durationFormatted)
                                 }
                                 
                                     .font(.caption)

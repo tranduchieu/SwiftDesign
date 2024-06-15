@@ -35,6 +35,10 @@ public struct ItemRow: View {
                 .overlay(
                     thumbnailOverlay
                 )
+                .overlay {
+                    RoundedRectangle(cornerRadius: thumbnail.cornerRadius)
+                        .stroke(.thinMaterial, lineWidth: 1) // Add the inner border
+                }
             }
             
             VStack(alignment: .leading, spacing: 4) {

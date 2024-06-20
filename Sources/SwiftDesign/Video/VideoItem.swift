@@ -15,6 +15,8 @@ public struct VideoItem: Identifiable, Hashable {
     public let thumbnail: AsyncThumbnail?
     public let youtubeUrl: URL?
     public let duration: Double?
+    public var aspectRatio: CGFloat
+    public let playlistId: String?
     var durationFormatted: String? {
         guard let duration = duration else { return nil }
         let formatter = DateComponentsFormatter()
@@ -52,7 +54,18 @@ public struct VideoItem: Identifiable, Hashable {
     }
     public var lastPlaybackPosition: Double?
     
-    public init(id: String, title: String, subtitle: String? = nil, author: String? = nil, thumbnail: AsyncThumbnail? = nil, youtubeUrl: URL? = nil, duration: Double? = nil, lastPlaybackPosition: Double? = nil) {
+    public init(
+        id: String,
+        title: String,
+        subtitle: String? = nil,
+        author: String? = nil,
+        thumbnail: AsyncThumbnail? = nil,
+        youtubeUrl: URL? = nil,
+        duration: Double? = nil,
+        aspectRatio: CGFloat? = nil,
+        lastPlaybackPosition: Double? = nil,
+        playlistId: String? = nil
+    ) {
         self.id = id
         self.title = title
         self.subtitle = subtitle
@@ -60,7 +73,9 @@ public struct VideoItem: Identifiable, Hashable {
         self.thumbnail = thumbnail
         self.youtubeUrl = youtubeUrl
         self.duration = duration
+        self.aspectRatio = aspectRatio ?? thumbnail?.aspectRatio ?? 16 / 9
         self.lastPlaybackPosition = lastPlaybackPosition
+        self.playlistId = playlistId
     }
     
     public static func == (lhs: VideoItem, rhs: VideoItem) -> Bool {

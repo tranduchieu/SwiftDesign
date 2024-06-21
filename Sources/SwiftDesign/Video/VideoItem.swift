@@ -14,6 +14,7 @@ public struct VideoItem: Identifiable, Hashable {
     public let author: String?
     public let thumbnail: AsyncThumbnail?
     public let youtubeUrl: URL?
+    public let videoUrl: URL?
     public let duration: Double?
     public var aspectRatio: CGFloat
     public let playlistId: String?
@@ -61,6 +62,7 @@ public struct VideoItem: Identifiable, Hashable {
         author: String? = nil,
         thumbnail: AsyncThumbnail? = nil,
         youtubeUrl: URL? = nil,
+        videoUrl: URL? = nil,
         duration: Double? = nil,
         aspectRatio: CGFloat? = nil,
         lastPlaybackPosition: Double? = nil,
@@ -72,6 +74,7 @@ public struct VideoItem: Identifiable, Hashable {
         self.author = author
         self.thumbnail = thumbnail
         self.youtubeUrl = youtubeUrl
+        self.videoUrl = videoUrl
         self.duration = duration
         self.aspectRatio = aspectRatio ?? thumbnail?.aspectRatio ?? 16 / 9
         self.lastPlaybackPosition = lastPlaybackPosition

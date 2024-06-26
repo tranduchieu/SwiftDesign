@@ -8,9 +8,9 @@
 import SwiftUI
 
 public struct AsyncThumbnail: Codable {
-    public let imageUrl: URL?
-    public let aspectRatio: CGFloat
-    public let cornerRadius: CGFloat
+    public var imageUrl: URL?
+    public var aspectRatio: CGFloat
+    public var cornerRadius: CGFloat
     
     public init(
         imageUrl: URL?,

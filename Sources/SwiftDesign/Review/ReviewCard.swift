@@ -21,7 +21,7 @@ public struct ReviewCard: View {
     
     public var body: some View {
         ReviewContent(review: review, contentLineLimit: contentLineLimit)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding()
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -30,13 +30,11 @@ public struct ReviewCard: View {
         }
         .sheet(isPresented: $isExpanded) {
             ScrollView {
-                VStack(spacing: 12){
-                    Text("Review")
-                        .font(.title2)
-                        .fontWeight(.bold)
+
                     ReviewContent(review: review, contentLineLimit: nil)
-                }
+                
                 .padding()
+                .padding(.top, 20)
             }
             .presentationDetents([.medium, .large])
  
@@ -57,26 +55,6 @@ struct ReviewContent: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            if let rating = review.rating {
-                StarRating(
-                    rating: .constant(rating),
-                    maxRating: 5,
-                    color: .yellow,
-                    bgColor: .gray
-                )
-                .frame(height: 16)
-            }
-            if let title = review.title {
-                Text(title)
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .lineLimit(3)
-            }
-            
-            Text(review.content)
-                .font(.subheadline)
-                .lineLimit(contentLineLimit)
-            
             HStack {
                 if let avatarUrl = review.avatarUrl {
                     AsyncThumbnailView(asyncThumbnail: .init(
@@ -103,6 +81,32 @@ struct ReviewContent: View {
                     }
                 }
             }
+            
+            if let rating = review.rating {
+                StarRating(
+                    rating: .constant(rating),
+                    maxRating: 5,
+                    color: .yellow,
+                    bgColor: .gray
+                )
+                .frame(height: 16)
+            }
+            if let title = review.title {
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .lineLimit(3)
+            }
+            if let contentLineLimit = contentLineLimit {
+                Text(review.content)
+                    .font(.subheadline)
+                    .lineLimit(contentLineLimit, reservesSpace: true)
+            } else {
+                Text(review.content)
+                    .font(.subheadline)
+                    .lineLimit(contentLineLimit)
+            }
+
         }
     }
 }

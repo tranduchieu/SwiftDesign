@@ -18,6 +18,8 @@ public struct VideoItem: Identifiable, Hashable {
     public let duration: Double?
     public var aspectRatio: CGFloat
     public let playlistId: String?
+    public let playlistTitle: String?
+    public let playlistSubtitle: String?
     var durationFormatted: String? {
         guard let duration = duration else { return nil }
         let formatter = DateComponentsFormatter()
@@ -66,7 +68,9 @@ public struct VideoItem: Identifiable, Hashable {
         duration: Double? = nil,
         aspectRatio: CGFloat? = nil,
         lastPlaybackPosition: Double? = nil,
-        playlistId: String? = nil
+        playlistId: String? = nil,
+        playlistTitle: String? = nil,
+        playlistSubtitle: String? = nil
     ) {
         self.id = id
         self.title = title
@@ -79,6 +83,8 @@ public struct VideoItem: Identifiable, Hashable {
         self.aspectRatio = aspectRatio ?? thumbnail?.aspectRatio ?? 16 / 9
         self.lastPlaybackPosition = lastPlaybackPosition
         self.playlistId = playlistId
+        self.playlistTitle = playlistTitle
+        self.playlistSubtitle = playlistSubtitle
     }
     
     public static func == (lhs: VideoItem, rhs: VideoItem) -> Bool {

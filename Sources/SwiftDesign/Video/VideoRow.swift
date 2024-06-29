@@ -9,9 +9,11 @@ import SwiftUI
 
 public struct VideoRow: View {
     let videoItem: VideoItem
+    let isPlaying: Bool
     
-    public init(videoItem: VideoItem) {
+    public init(videoItem: VideoItem, isPlaying: Bool = false) {
         self.videoItem = videoItem
+        self.isPlaying = isPlaying
     }
     
     public var body: some View {
@@ -28,7 +30,7 @@ public struct VideoRow: View {
                             if let durationFormatted = videoItem.durationFormatted {
                                 
                                 HStack(spacing: 4) {
-                                    Image(systemName: "play.fill")
+                                    Image(systemName: isPlaying ? "waveform" : "play.fill")
                                     Text(videoItem.durationLeftFormatted != nil ? "\(videoItem.durationLeftFormatted!) left" : durationFormatted)
                                 }
                                 
@@ -36,9 +38,9 @@ public struct VideoRow: View {
                                     .fontWeight(.semibold)
                                     .fontDesign(.rounded)
                                     .lineLimit(1)
-                                    .padding(4)
-                                    .background(Color.black.opacity(0.6))
-                                    .foregroundStyle(.white)
+                                    .padding(3)
+                                    .background(isPlaying ? Color.white.opacity(0.6) : Color.black.opacity(0.6))
+                                    .foregroundStyle( isPlaying ? .black : .white)
                                     .cornerRadius(4)
                                     .overlay {
                                         if let duration = videoItem.duration, let lastPlaybackPosition = videoItem.lastPlaybackPosition {

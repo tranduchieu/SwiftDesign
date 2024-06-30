@@ -10,38 +10,33 @@ import SwiftUI
 public struct ReviewCard: View {
     let review: Review
     let contentLineLimit: Int?
+    @Binding var isExpanded: Bool
     
-    public init(review: Review, contentLineLimit: Int? = nil) {
+    public init(review: Review, contentLineLimit: Int? = nil, isExpanded: Binding<Bool>) {
         self.review = review
         self.contentLineLimit = contentLineLimit
+        self._isExpanded = isExpanded
     }
-    
-    @State private var isExpanded = false
-    @State private var detent: PresentationDetent = .large
     
     public var body: some View {
         ReviewContent(review: review, contentLineLimit: contentLineLimit)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding()
-        .background(.ultraThinMaterial)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
-        .onTapGesture {
-            isExpanded.toggle()
-        }
-        .sheet(isPresented: $isExpanded) {
-            ScrollView {
-
-                    ReviewContent(review: review, contentLineLimit: nil)
-                
-                .padding()
-                .padding(.top, 20)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .onTapGesture {
+                print("Tapped review id: \(review.id)")
+                isExpanded.toggle()
             }
-            .presentationDetents([.medium, .large])
- 
-        }
-    
+            .sheet(isPresented: $isExpanded) {
+                ScrollView {
+                    ReviewContent(review: review, contentLineLimit: nil)
+                        .padding()
+                        .padding(.top, 20)
+                }
+                .presentationDetents([.medium, .large])
+            }
     }
-
 }
 
 struct ReviewContent: View {
@@ -111,6 +106,6 @@ struct ReviewContent: View {
     }
 }
 
-#Preview {
-    ReviewCard(review: Review.examples[0])
-}
+//#Preview {
+//    ReviewCard(review: Review.examples[0])
+//}

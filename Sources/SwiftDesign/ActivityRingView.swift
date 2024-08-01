@@ -16,7 +16,7 @@ public struct ActivityRingView: View {
     let colors: [Color]
     
     public init(progress: CGFloat, size: CGFloat = 100, lineWidth: CGFloat? = nil, colors: [Color] = [.green, .red]) {
-        self.progress = progress
+        self.progress = min(max(progress, 0), 1)
         self.size = size
         self.lineWidth = lineWidth ?? size / 4
         self.colors = colors
@@ -51,7 +51,7 @@ public struct ActivityRingView: View {
             Circle()
                 .frame(width: lineWidth, height: lineWidth)
                 .foregroundColor(progress > 0.95 ? colors[1]: colors[1].opacity(0))
-                .offset(y: -150)
+                .offset(y: -(size / 2))
                 .rotationEffect(Angle.degrees(360 * Double(progress)))
                 .shadow(color: progress > 0.96 ? Color.black.opacity(0.1): Color.clear, radius: 3, x: 4, y: 0)
         }.frame(idealWidth: size, idealHeight: size, alignment: .center)

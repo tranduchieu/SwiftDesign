@@ -69,3 +69,27 @@ public struct ActivityRingView: View {
         .fixedSize()
     }
 }
+
+#Preview {
+    Circle()
+        .fill(Color(.secondarySystemBackground))
+        .overlay {
+            ActivityRingView(
+                progress: 0.6,
+                size: 46,
+                lineWidth: 10,
+                colors: [.accentColor, .red]
+            )
+            .fixedSize()
+        }
+        .overlay {
+            ActivityRingView(
+                progress: 0.8,
+                size: 28,
+                lineWidth: 8,
+                colors: [Color(red: 166 / 255, green: 255 / 255, blue: 0 / 255), .green]
+            )
+            .fixedSize()
+        }
+        .frame(width: 64, height: 64)
+}

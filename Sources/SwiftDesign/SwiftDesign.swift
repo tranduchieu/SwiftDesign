@@ -7,6 +7,11 @@ public struct RoundedCornersShape: Shape {
     var corners: UIRectCorner
     var radius: CGFloat
     
+    public init(corners: UIRectCorner, radius: CGFloat) {
+        self.corners = corners
+        self.radius = radius
+    }
+    
     public func path(in rect: CGRect) -> Path {
         let path = UIBezierPath(
             roundedRect: rect,

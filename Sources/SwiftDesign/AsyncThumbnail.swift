@@ -50,17 +50,21 @@ public struct AsyncThumbnailView: View {
                 
             } placeholder: {
                 RoundedRectangle(cornerRadius: asyncThumbnail.cornerRadius)
+                    #if os(iOS)
                     .fill(
                         Color(UIColor.secondarySystemBackground)
                     )
+                    #endif
                     .aspectRatio(asyncThumbnail.aspectRatio, contentMode: .fit)
                 
             }
         } else {
             RoundedRectangle(cornerRadius: asyncThumbnail.cornerRadius)
+                #if os(iOS)
                 .fill(
                     Color(UIColor.secondarySystemBackground)
                 )
+                #endif
                 .aspectRatio(asyncThumbnail.aspectRatio, contentMode: .fit)
         }
     }

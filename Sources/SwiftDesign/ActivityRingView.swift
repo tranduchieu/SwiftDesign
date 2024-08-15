@@ -72,7 +72,9 @@ public struct ActivityRingView: View {
 
 #Preview {
     Circle()
+    #if os(iOS)
         .fill(Color(.secondarySystemBackground))
+    #endif
         .overlay {
             ActivityRingView(
                 progress: 0.6,
